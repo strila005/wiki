@@ -1,4 +1,5 @@
 import re
+import markdown2
 
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
@@ -32,6 +33,11 @@ def get_entry(title):
     """
     try:
         f = default_storage.open(f"entries/{title}.md")
-        return f.read().decode("utf-8")
+        markdown_content = f.read().decode("utf-8")            # Convert Markdown to HTML
+        html_content = markdown2.markdown(markdown_content)
+        with open(f'{title}.html', 'w') as html_file:          # Save the HTML content to a file
+            html_file.write(html_content)
+        with open(f'{title}.html', 'r') as html_file:      # Read and return the HTML content from the file
+            return html_file.read()
     except FileNotFoundError:
         return None
