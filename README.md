@@ -1,6 +1,6 @@
 # wiki
 
-To run this project in the terminal, you need:
+### To run this project in the terminal, you need:
 
 1. Open the project folder:
    >`cd <PATH>`
